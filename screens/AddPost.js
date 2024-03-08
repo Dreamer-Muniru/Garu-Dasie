@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, Image, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TextInput, Button, TouchableOpacity, ToastAndroid } from 'react-native'
 import { app } from '../firebase/firebaseConfig'
 import {collection, getDocs, getFirestore} from 'firebase/firestore'
 import { Formik } from 'formik';
 import {Picker} from '@react-native-picker/picker'
+import * as ImagePicker from 'expo-image-picker';
 
 export default function AddPost() {
     const [categoryList, setCategoryList] = useState([]);
+    const [image, setImage] = useState(null);
     const db = getFirestore(app);
+
     useEffect(()=>{
         getCategoryList();
     },[])
@@ -20,21 +23,55 @@ export default function AddPost() {
             setCategoryList(categoryList =>[...categoryList, doc.data()])
         })
     }
+    
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 4],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+        }
+      };
+
+      const onSubmitMethod=(value)=>{
+        value.image=image;
+        console.log(value)
+      }
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Add Post</Text>
             <Text className="text-center text-[16px] pt-2 text-grey-500 mb-2">Add a new post and start making money now!</Text>
             {/* Adding formik @formik.org */}
             <Formik initialValues={{title: '', category:'', desc:'', price:'', address:'', image: ''}}
-            onSubmit={value =>console.log(value)}
+            onSubmit={value =>onSubmitMethod(value)}
+            validate={(values) =>{
+                const errors ={}
+                if(!values.title){
+                    console.log("Title not present")
+                    ToastAndroid.show('Please Add the title', ToastAndroid.SHORT)
+                    errors.name = "Please add the title"
+                }
+                return errors
+            }}
             >
-                {({handleChange, handleBlur, handleSubmit, values, setFieldValue})=>(
+                {({handleChange, handleBlur, handleSubmit, values, setFieldValue, errors})=>(
                     <View>
-                        <TouchableOpacity>
-                            <Image source={require('../assets/placeholder.jpg')} 
+                        <TouchableOpacity onPress={pickImage}>
+                        {image? 
+                            <Image source={{uri:image}} style={{width: 100, height: 100, borderRadius: 10}}/>
+                        : <Image source={require('../assets/placeholder.jpg')} 
                                 style={{width: 100, height: 100, borderRadius: 10}}
                             />
+                        }   
                         </TouchableOpacity>
+                        
                         <TextInput style={styles.input} placeholder='Title'
                             value={values?.title} onChangeText={handleChange('title')}
                          />
