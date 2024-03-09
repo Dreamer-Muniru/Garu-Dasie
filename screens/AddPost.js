@@ -1,16 +1,20 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, Image, StyleSheet, TextInput, Button, TouchableOpacity, ToastAndroid } from 'react-native'
+import { View, Text, Image, StyleSheet, TextInput, Button, TouchableOpacity, ToastAndroid, ActivityIndicator, Alert } from 'react-native'
 import { app } from '../firebase/firebaseConfig'
-import {collection, getDocs, getFirestore} from 'firebase/firestore'
+import {collection, addDoc, getFirestore, getDocs} from 'firebase/firestore'
+import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
 import { Formik } from 'formik';
 import {Picker} from '@react-native-picker/picker'
 import * as ImagePicker from 'expo-image-picker';
+import { useUser } from '@clerk/clerk-expo'
 
 export default function AddPost() {
     const [categoryList, setCategoryList] = useState([]);
     const [image, setImage] = useState(null);
     const db = getFirestore(app);
-
+    const storage = getStorage( )
+    const {user}=useUser()
+    const [loading, setLoading] = useState(false);
     useEffect(()=>{
         getCategoryList();
     },[])
@@ -40,16 +44,42 @@ export default function AddPost() {
         }
       };
 
-      const onSubmitMethod=(value)=>{
-        value.image=image;
-        console.log(value)
+      const onSubmitMethod= async(value)=>{
+        setLoading(true)
+        // Converting url to blob file
+        const resp = await fetch(image);
+        const blob = await resp.blob();
+
+        const storageRef = ref(storage, 'garuDasie/'+Date.now()+".jpg")
+        uploadBytes(storageRef, blob).then((snapshot) =>{
+            console.log('Uploaded a blob or file')
+        }).then((resp)=>{
+            getDownloadURL(storageRef).then(async(getDownloadURL) =>{
+                console.log(getDownloadURL);
+                value.image=getDownloadURL;
+                value.userName = user.fullName;
+                value.userEmail = user.primaryEmailAddress.emailAddress;
+                value.userImage = user.imageUrl;
+
+                // Adding document to firebase
+                const docRef = await addDoc(collection(db, "userPost"), value)
+                if(docRef.id)
+                {
+                    setLoading(false)
+                    Alert.alert('Success!!!', 'Post Added Successfully')
+                }
+            })
+        })
+
       }
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Add Post</Text>
             <Text className="text-center text-[16px] pt-2 text-grey-500 mb-2">Add a new post and start making money now!</Text>
             {/* Adding formik @formik.org */}
-            <Formik initialValues={{title: '', category:'', desc:'', price:'', address:'', image: ''}}
+            <Formik initialValues={{title: '', category:'', desc:'', price:'', address:'', image: '', userName: '', 
+                userEmail: '', userImage: ''
+            }}
             onSubmit={value =>onSubmitMethod(value)}
             validate={(values) =>{
                 const errors ={}
@@ -99,8 +129,12 @@ export default function AddPost() {
                                 
                             </Picker>
                         </View>
-                        <TouchableOpacity onPress={handleSubmit} className="p-2 mt-5 bg-blue-500 rounded-full">
-                            <Text className="text-center text-white text-[18px]">Submit</Text>
+                        <TouchableOpacity onPress={handleSubmit} style={{backgroundColor:loading?'#ccc':'blue'}} disabled={loading} 
+                            className="p-2 mt-3 bg-blue-500 rounded-full">
+                           {loading? <ActivityIndicator color='green'/> 
+                           : 
+                            <Text className="text-center text-white text-[18px]">Submit</Text> 
+                           } 
                         </TouchableOpacity>
                 
                     </View>

@@ -14,7 +14,7 @@ export default function App() {
           <SignedIn>
             <TabNavigation/>
           </SignedIn>
-          </NavigationContainer>
+        </NavigationContainer>
         <SignedOut>
           <Login/>
         </SignedOut>
