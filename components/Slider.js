@@ -25,7 +25,8 @@ export default function Slider({sliderList}) {
 const styles = StyleSheet.create({
     sliderImage:{
         width: 400,
-        height: 200,
+        marginTop: 20,
+        height: 150,
         marginRight: 20,
         
 

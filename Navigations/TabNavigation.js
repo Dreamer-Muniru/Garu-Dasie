@@ -7,6 +7,7 @@ import Explore from '../screens/Explore';
 import Home from '../screens/Home';
 import AddPost from '../screens/AddPost';
 import Profile from '../screens/Profile';
+import StackNavigation from './StackNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,7 @@ export default function TabNavigation() {
     return (
        
         <Tab.Navigator screenOptions={{headerShown: false}}>
-            <Tab.Screen name="Home" component={Home} 
+            <Tab.Screen name="Home-Tab" component={StackNavigation} 
             options={{
                 tabBarLabel:({color})=>(
                     <Text style={{color: color, fontSize: 16, marginBottom: 3}}>Home</Text>

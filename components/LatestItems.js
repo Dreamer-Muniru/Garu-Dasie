@@ -1,10 +1,29 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from 'react';
+import { View, Text, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
+import PostItems from './PostItems';
 
-export default function LatestItems() {
-    return (
-        <View>
-            <Text>latestItems</Text>
-        </View>
-    )
+export default function LatestItemList({ latestItemList }) {
+  return (
+    <View style={styles.container}>
+       
+      <Text>Latest Items</Text>
+      <FlatList
+        data={latestItemList}
+        numColumns={2}
+        renderItem={({ item, index }) => (
+          <PostItems item={item} />
+        )}
+        keyExtractor={(item, index) => index.toString()} 
+        ListFooterComponent={<View style={{ marginBottom: 100 }} />}
+      />
+     
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+  },
+ 
+});

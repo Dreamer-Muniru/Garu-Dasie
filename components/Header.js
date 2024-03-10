@@ -32,8 +32,8 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     profileImage:{
-        width: 60,
-        height: 60,
+        width: 40,
+        height: 40,
         borderRadius: 100
     },
     container:{
@@ -46,15 +46,15 @@ const styles = StyleSheet.create({
     },
     userName:{
         fontWeight: 'bold',
-        fontSize: 22
+        fontSize: 18
     },
     searchBar:{
         display: 'flex',
         flexDirection: 'row',
         padding: 10,
         paddingBottom: 10,
-        backgroundColor: '#fff',
-        borderRadius: 10,
+        backgroundColor: 'lightblue',
+        borderRadius: 20,
         marginTop: 10
     },
     searchInput:{
