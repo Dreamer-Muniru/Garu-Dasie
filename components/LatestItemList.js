@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
 import PostItems from './PostItems';
 
-export default function LatestItemList({ latestItemList }) {
+export default function LatestItemList({ latestItemList, heading }) {
   return (
     <View style={styles.container}>
        
-      <Text>Latest Items</Text>
+      <Text>{heading}</Text>
       <FlatList
         data={latestItemList}
         numColumns={2}

@@ -5,7 +5,7 @@ import Slider from '../components/Slider'
 import { collection, getDocs, getFirestore, orderBy } from 'firebase/firestore'
 import { app } from '../firebase/firebaseConfig'
 import Categories from '../components/Categories'
-import LatestItemList from '../components/LatestItems'
+import LatestItemList from '../components/LatestItemList'
 
 export default function Home() {
     const db = getFirestore(app)
@@ -57,7 +57,7 @@ export default function Home() {
             {/* Category List */}
             <Categories categoryList={categoryList}/>
             {/* Latest Items */}
-            <LatestItemList latestItemList={latestItemList} /> 
+            <LatestItemList latestItemList={latestItemList} heading={'Latest Items'} /> 
         </ScrollView>
     )
 }

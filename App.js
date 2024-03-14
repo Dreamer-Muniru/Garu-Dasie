@@ -11,9 +11,9 @@ export default function App() {
       <View className="flex-1">
         <StatusBar style='grey' />
         <NavigationContainer>
-          <SignedIn>
             <TabNavigation/>
-          </SignedIn>
+          {/* <SignedIn>
+          </SignedIn> */}
         </NavigationContainer>
         <SignedOut>
           <Login/>

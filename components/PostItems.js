@@ -1,17 +1,24 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 export default function PostItems({item}) {
+  const navigation = useNavigation();
+  
     return (
-        <TouchableOpacity style={styles.product_dev}>
+        <TouchableOpacity onPress={() => navigation.push('product-detail',
+         {
+          product:item
+         })} 
+         style={styles.product_dev}
+          
+          >
             <Image source={{ uri: item.image }} style={styles.product_image} />
             <View>
                 <Text style={styles.category}>{item.category}</Text>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.price}>{item.price}</Text>
-
             </View>
-
       </TouchableOpacity>
     )
 }
