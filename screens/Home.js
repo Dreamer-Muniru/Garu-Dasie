@@ -49,7 +49,7 @@ export default function Home() {
     }
 
     return (
-        <ScrollView className="py-8 px-6">
+        <View className="py-8 px-6">
         {/* Header Component */}
             <Header />
         {/* Sliders */}
@@ -58,6 +58,6 @@ export default function Home() {
             <Categories categoryList={categoryList}/>
             {/* Latest Items */}
             <LatestItemList latestItemList={latestItemList} heading={'Latest Items'} /> 
-        </ScrollView>
+        </View>
     )
 }
