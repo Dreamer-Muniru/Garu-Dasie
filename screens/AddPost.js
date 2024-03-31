@@ -24,7 +24,7 @@ export default function AddPost() {
         setCategoryList([]);
         const querySnapshot = await getDocs(collection(db, 'Category'));
         querySnapshot.forEach((doc)=>{
-            console.log("Docs:", doc.data());
+            // console.log("Docs:", doc.data());
             setCategoryList(categoryList =>[...categoryList, doc.data()])
         })
     }
@@ -38,7 +38,7 @@ export default function AddPost() {
           quality: 1,
         });
     
-        console.log(result);
+        // console.log(result);
     
         if (!result.canceled) {
           setImage(result.assets[0].uri);
@@ -53,10 +53,10 @@ export default function AddPost() {
 
         const storageRef = ref(storage, 'garuDasie/'+Date.now()+".jpg")
         uploadBytes(storageRef, blob).then((snapshot) =>{
-            console.log('Uploaded a blob or file')
+            // console.log('Uploaded a blob or file')
         }).then((resp)=>{
             getDownloadURL(storageRef).then(async(getDownloadURL) =>{
-                console.log(getDownloadURL);
+                // console.log(getDownloadURL);
                 value.image=getDownloadURL;
                 value.userName = user.fullName;
                 value.userEmail = user.primaryEmailAddress.emailAddress;

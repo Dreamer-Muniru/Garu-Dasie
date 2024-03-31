@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, ScrollView } from 'react-native'
-import Header from '../components/Header'
-import Slider from '../components/Slider'
 import { collection, getDocs, getFirestore, orderBy } from 'firebase/firestore'
 import { app } from '../firebase/firebaseConfig'
 import Categories from '../components/Categories'
 import LatestItemList from '../components/LatestItemList'
+import Header from '../components/Header'
+import Slider from '../components/Slider'
 
 export default function Home() {
     const db = getFirestore(app)
@@ -49,15 +49,15 @@ export default function Home() {
     }
 
     return (
-        <View className="py-8 px-6">
-        {/* Header Component */}
+        <ScrollView className="py-8 px-6">
+            {/* Header Component */}
             <Header />
-        {/* Sliders */}
+            {/* Sliders */}
             <Slider sliderList={sliderList} /> 
             {/* Category List */}
             <Categories categoryList={categoryList}/>
             {/* Latest Items */}
             <LatestItemList latestItemList={latestItemList} heading={'Latest Items'} /> 
-        </View>
+        </ScrollView>
     )
 }

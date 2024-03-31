@@ -8,7 +8,7 @@ export default function PostItems({item}) {
     return (
         <TouchableOpacity onPress={() => navigation.push('product-detail',
          {
-          product:item
+          product: item
          })} 
          style={styles.product_dev}
           

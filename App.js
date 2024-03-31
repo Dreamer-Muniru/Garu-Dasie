@@ -7,16 +7,21 @@ import TabNavigation from './Navigations/TabNavigation';
 
 export default function App() {
   return (
-      <View className="flex-1">
-        <StatusBar style='grey' />
-        <NavigationContainer>
-            <TabNavigation/>
-          {/* <SignedIn>
-          </SignedIn> */}
-          <Login/>
-        </NavigationContainer>
+    <ClerkProvider publishableKey='pk_test_YmV0dGVyLXNwYXJyb3ctMzcuY2xlcmsuYWNjb3VudHMuZGV2JA'>
+   
+      <StatusBar style='grey' />
+      <NavigationContainer>
+        <SignedIn>
+          <TabNavigation/>
+        </SignedIn>
+      <SignedOut>
+        <Login/>
+      </SignedOut>
+      </NavigationContainer>
     
-      </View>
+
+ 
+  </ClerkProvider>
 
   );
 }
