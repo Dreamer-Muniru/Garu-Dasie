@@ -9,14 +9,14 @@ export default function App() {
   return (
     <ClerkProvider publishableKey='pk_test_YmV0dGVyLXNwYXJyb3ctMzcuY2xlcmsuYWNjb3VudHMuZGV2JA'>
    
-      <StatusBar style='grey' />
+      <StatusBar style='grey' />6
       <NavigationContainer>
         <SignedIn>
           <TabNavigation/>
         </SignedIn>
-      <SignedOut>
-        <Login/>
-      </SignedOut>
+        <SignedOut>
+          <Login/>
+        </SignedOut>
       </NavigationContainer>
     
 

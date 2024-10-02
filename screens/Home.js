@@ -51,7 +51,7 @@ export default function Home() {
     return (
         <ScrollView className="py-8 px-6">
             {/* Header Component */}
-            <Header />
+            <Header/>
             {/* Sliders */}
             <Slider sliderList={sliderList} /> 
             {/* Category List */}

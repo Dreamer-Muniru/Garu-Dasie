@@ -21,10 +21,20 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.muniru_dreamer.garudasie"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY",
+      "eas": {
+        "projectId": "55f1945a-e421-4b75-a2cb-b0783889ff10"
+      }
     },
     "plugins": [
       [
