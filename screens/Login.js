@@ -33,7 +33,7 @@ export default function Login() {
             />
             <View className="p-8 bg-white rounded-3xl mt-[-20px] shadow-md">
                 <Text className="font-bold text-[25px] text-center">Garu Dasie (MarketPlace)</Text>
-                <Text className="text-center text-[20px] pt-5">Buy & Sale market place in Garu where you can sell anything and make money.</Text>
+                <Text className="text-center text-[20px] pt-5">Buying & Selling market place in Garu where you can sell anything and make money.</Text>
                 {/* GetStarted  */}
                 <TouchableOpacity onPress={onPress} className="p-4 bg-blue-500 rounded-full mt-20" >
                     <Text className="text-white text-center text-[20px]">GetStarted</Text>
