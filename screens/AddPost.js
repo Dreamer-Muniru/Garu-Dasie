@@ -97,7 +97,7 @@ export default function AddPost() {
                         <View>
                             <TouchableOpacity onPress={pickImage}>
                             {image? 
-                                <Image source={{uri:image}} style={{width: 100, height: 100, borderRadius: 10}}/>
+                                <Image source={{uri:image}} style={{width: 100, height: 100, borderRadius: 8}}/>
                             : <Image source={require('../assets/placeholder.jpg')} 
                                     style={{width: 100, height: 100, borderRadius: 10}}
                                 />
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     },
     input:{
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 8,
         padding: 10,
         paddingTop: 20,
         marginTop: 10,
